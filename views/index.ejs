@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= profile.name %> — <%= profile.role %></title>
+<meta name="description" content="<%= profile.tagline %>">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- speed-line ambient background layer -->
+<div class="ambient" aria-hidden="true"></div>
+
+<!-- ===== NAV ===== -->
+<nav class="site-nav" id="siteNav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">DK<span class="brand-dot">.</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#profil"><span class="idx">01</span>Profil</a></li>
+      <li><a href="#experience"><span class="idx">02</span>Expérience</a></li>
+      <li><a href="#projets"><span class="idx">03</span>Projets</a></li>
+      <li><a href="#competences"><span class="idx">04</span>Compétences</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Portfolio — <%= profile.location %></p>
+      <h1 class="hero-title">
+        <%= profile.name.split(' ')[0] %><br><%= profile.name.split(' ')[1] %>
+      </h1>
+      <p class="hero-role"><%= profile.role %></p>
+      <p class="hero-tagline"><%= profile.tagline %></p>
+      <div class="hero-actions">
+        <a href="#projets" class="btn btn-signal">Voir les projets</a>
+        <a href="<%= profile.cv %>" class="btn btn-outline-signal" download>Télécharger le CV ↓</a>
+      </div>
+      <div class="hero-social">
+        <a href="<%= profile.linkedin %>" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="<%= profile.github %>" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+      <div class="hero-stats">
+        <% profile.stats.forEach(function(s){ %>
+        <div class="stat">
+          <span class="stat-value"><%= s.value %></span>
+          <span class="stat-label"><%= s.label %></span>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="terminal" role="img" aria-label="Terminal affichant le profil de <%= profile.name %>">
+        <div class="terminal-bar">
+          <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+          <span class="terminal-title">djaffar@portfolio: ~</span>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+          <div class="photo-frame">
+            <img src="<%= profile.photo %>" alt="Photo de <%= profile.name %>">
+          </div>
+          <p class="tline"><span class="prompt">$</span> whoami</p>
+          <p class="tline tout" id="tOut1"></p>
+          <p class="tline"><span class="prompt">$</span> cat stack.txt</p>
+          <p class="tline tout" id="tOut2"></p>
+          <p class="tline"><span class="prompt">$</span> <span class="cursor">▌</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== PROFIL ===== -->
+<section class="section" id="profil">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-idx">01</span>
+      <h2 class="section-title">Profil</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <p class="lede"><%= profile.summary %></p>
+      </div>
+      <div class="col-lg-4">
+        <div class="info-card">
+          <p><span class="ic-label">Email</span><a href="mailto:<%= profile.email %>"><%= profile.email %></a></p>
+          <p><span class="ic-label">Téléphone</span><a href="tel:<%= profile.phone.replace(/\s/g,'') %>"><%= profile.phone %></a></p>
+          <p><span class="ic-label">Localisation</span><span><%= profile.location %></span></p>
+          <p><span class="ic-label">Centres d'intérêt</span><span><%= profile.interests.join(' · ') %></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE (git log style) ===== -->
+<section class="section section-alt" id="experience">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-idx">02</span>
+      <h2 class="section-title">Expérience</h2>
+      <span class="section-note">git log --author="Djaffar" --oneline</span>
+    </div>
+
+    <div class="commit-log">
+      <% profile.experience.forEach(function(exp, i){ %>
+      <article class="commit">
+        <div class="commit-marker">
+          <span class="commit-dot"></span>
+          <% if(i < profile.experience.length - 1){ %><span class="commit-line"></span><% } %>
+        </div>
+        <div class="commit-body">
+          <p class="commit-meta"><%= exp.period %></p>
+          <h3 class="commit-title"><%= exp.role %></h3>
+          <% if(exp.org){ %><p class="commit-org"><%= exp.org %></p><% } %>
+          <ul class="commit-points">
+            <% exp.points.forEach(function(p){ %><li><%= p %></li><% }); %>
+          </ul>
+        </div>
+      </article>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJETS (manga panels) ===== -->
+<section class="section" id="projets">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-idx">03</span>
+      <h2 class="section-title">Projets réalisés</h2>
+    </div>
+
+    <div class="panel-grid">
+      <% profile.projects.forEach(function(p){ %>
+      <article class="panel">
+        <div class="panel-tab"><%= p.code %></div>
+        <h3 class="panel-title"><%= p.title %></h3>
+        <ul class="panel-points">
+          <% p.points.forEach(function(pt){ %><li><%= pt %></li><% }); %>
+        </ul>
+        <div class="panel-footer">
+          <div class="panel-stack">
+            <% p.stack.forEach(function(s){ %><span class="tag"><%= s %></span><% }); %>
+          </div>
+          <% if(p.link){ %>
+          <a href="<%= p.link %>" target="_blank" rel="noopener" class="panel-link">Voir le site ↗</a>
+          <% } %>
+        </div>
+      </article>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPETENCES ===== -->
+<section class="section section-alt" id="competences">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-idx">04</span>
+      <h2 class="section-title">Compétences techniques</h2>
+    </div>
+
+    <div class="skills-grid">
+      <% profile.skills.forEach(function(sk){ %>
+      <div class="skill-group">
+        <h4><%= sk.group %></h4>
+        <div class="skill-tags">
+          <% sk.items.forEach(function(it){ %><span class="tag tag-mono"><%= it %></span><% }); %>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORMATION & LANGUES ===== -->
+<section class="section" id="formation">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-7">
+        <div class="section-head">
+          <span class="section-idx">05</span>
+          <h2 class="section-title">Formation</h2>
+        </div>
+        <div class="edu-list">
+          <% profile.education.forEach(function(ed){ %>
+          <div class="edu-item">
+            <p class="edu-period"><%= ed.period %></p>
+            <h4><%= ed.title %></h4>
+            <% if(ed.org){ %><p class="edu-org"><%= ed.org %></p><% } %>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="section-head">
+          <span class="section-idx">06</span>
+          <h2 class="section-title">Langues</h2>
+        </div>
+        <div class="lang-list">
+          <% profile.languages.forEach(function(l){ %>
+          <div class="lang-item">
+            <div class="lang-top"><span><%= l.name %></span><span class="lang-level"><%= l.level %></span></div>
+            <div class="lang-bar"><div class="lang-fill" style="width: <%= l.percent %>%"></div></div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section section-contact" id="contact">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <div class="section-head">
+          <span class="section-idx">07</span>
+          <h2 class="section-title">Contact</h2>
+        </div>
+        <p class="lede">Un projet web, mobile ou desktop en tête ? Écrivez-moi, je réponds rapidement.</p>
+        <div class="contact-links">
+          <a href="mailto:<%= profile.email %>" class="contact-link"><%= profile.email %></a>
+          <a href="tel:<%= profile.phone.replace(/\s/g,'') %>" class="contact-link"><%= profile.phone %></a>
+          <span class="contact-link contact-static"><%= profile.location %></span>
+          <a href="<%= profile.linkedin %>" target="_blank" rel="noopener" class="contact-link">LinkedIn ↗</a>
+          <a href="<%= profile.github %>" target="_blank" rel="noopener" class="contact-link">GitHub ↗</a>
+          <a href="<%= profile.cv %>" class="contact-link" download>Télécharger le CV ↓</a>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-row">
+            <label for="cName">Nom</label>
+            <input type="text" id="cName" name="name" required>
+          </div>
+          <div class="form-row">
+            <label for="cEmail">Email</label>
+            <input type="email" id="cEmail" name="email" required>
+          </div>
+          <div class="form-row">
+            <label for="cMessage">Message</label>
+            <textarea id="cMessage" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-signal" id="contactSubmit">Envoyer le message</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> <%= profile.name %></span>
+    <span class="footer-mono">build / node.js · bootstrap</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-djaffar-khanssaou",
+  "version": "1.0.0",
+  "description": "Portfolio professionnel de Djaffar Khanssaou — Développeuse Full Stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ejs": "^3.1.10",
+    "nodemailer": "^6.9.14",
+    "dotenv": "^16.4.5"
+  }
+}
