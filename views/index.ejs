@@ -30,17 +30,17 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-<<<<<<< HEAD
+
       <li><a href="#profil"><span class="idx">01</span>Profil</a></li>
       <li><a href="#experience"><span class="idx">02</span>Expérience</a></li>
       <li><a href="#projets"><span class="idx">03</span>Projets</a></li>
       <li><a href="#competences"><span class="idx">04</span>Compétences</a></li>
-=======
+
       <li><a href="#profil">Profil</a></li>
       <li><a href="#experience">Expérience</a></li>
       <li><a href="#projets">Projets</a></li>
       <li><a href="#competences">Compétences</a></li>
->>>>>>> 170311aa59b5cca500fa69a040d5f1335eff710d
+
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
   </div>
@@ -233,11 +233,11 @@
           <% profile.languages.forEach(function(l){ %>
           <div class="lang-item">
             <div class="lang-top"><span><%= l.name %></span><span class="lang-level"><%= l.level %></span></div>
-<<<<<<< HEAD
-            <div class="lang-bar"><div class="lang-fill" style="width: <%= l.percent %>%"></div></div>
-=======
+
             <div class="lang-bar"><div class="lang-fill" style="width: '<%= l.percent %>'"></div></div>
->>>>>>> 170311aa59b5cca500fa69a040d5f1335eff710d
+
+            <div class="lang-bar"><div class="lang-fill" style="width: '<%= l.percent %>'"></div></div>
+
           </div>
           <% }); %>
         </div>
