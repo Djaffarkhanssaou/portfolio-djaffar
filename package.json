@@ -10,7 +10,11 @@
   "dependencies": {
     "express": "^4.19.2",
     "ejs": "^3.1.10",
+<<<<<<< HEAD
+    "resend": "^4.0.0",
+=======
     "nodemailer": "^6.9.14",
+>>>>>>> 170311aa59b5cca500fa69a040d5f1335eff710d
     "dotenv": "^16.4.5"
   }
 }
