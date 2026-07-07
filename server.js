@@ -35,7 +35,6 @@ const profile = {
   stats: [
     { value: '5+', label: 'ans d\u2019expérience' },
     { value: '10+', label: 'projets livrés' },
-    { value: '3', label: 'plateformes — web, mobile, desktop' },
   ],
 
   experience: [
