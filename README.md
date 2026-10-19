@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Portfolio — Djaffar Khanssaou
 
 Portfolio personnel en Node.js (Express + EJS) avec Bootstrap 5.
@@ -68,9 +67,3 @@ Resend puis définir `RESEND_FROM` pour envoyer depuis votre propre adresse.
 Compatible avec n'importe quel hébergeur Node.js (Render, Railway, VPS,
 Heroku...). Définir la variable d'environnement `PORT` si nécessaire
 (3000 par défaut).
-=======
-
-# Portfolio — Djaffar Khanssaou
-
-Développeur Full Stack Node.js
->>>>>>> 170311aa59b5cca500fa69a040d5f1335eff710d

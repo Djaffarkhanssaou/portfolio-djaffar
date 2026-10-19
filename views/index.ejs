@@ -30,12 +30,10 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      
-      <li><a href="#profil">Profil</a></li>
-      <li><a href="#experience">Expérience</a></li>
-      <li><a href="#projets">Projets</a></li>
-      <li><a href="#competences">Compétences</a></li>
-
+      <li><a href="#profil"><span class="idx">01</span>Profil</a></li>
+      <li><a href="#experience"><span class="idx">02</span>Expérience</a></li>
+      <li><a href="#projets"><span class="idx">03</span>Projets</a></li>
+      <li><a href="#competences"><span class="idx">04</span>Compétences</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
   </div>
@@ -148,12 +146,10 @@
 <!-- ===== PROJETS (manga panels) ===== -->
 <section class="section" id="projets">
   <div class="container">
-
     <div class="section-head">
       <span class="section-idx">03</span>
       <h2 class="section-title">Projets réalisés</h2>
     </div>
-
 
     <div class="panel-grid">
       <% profile.projects.forEach(function(p){ %>
@@ -168,7 +164,7 @@
             <% p.stack.forEach(function(s){ %><span class="tag"><%= s %></span><% }); %>
           </div>
           <% if(p.link){ %>
-          <a href="<%= p.link %>" target="_blank" rel="noopener" class="panel-link">Voir le site ↗</a>
+          <a href="<%= p.link %>" target="_blank" rel="noopener" class="panel-link"><%= p.link.includes('github.com') ? 'Voir sur GitHub ↗' : 'Voir le site ↗' %></a>
           <% } %>
         </div>
       </article>
@@ -226,11 +222,7 @@
           <% profile.languages.forEach(function(l){ %>
           <div class="lang-item">
             <div class="lang-top"><span><%= l.name %></span><span class="lang-level"><%= l.level %></span></div>
-
-            <div class="lang-bar"><div class="lang-fill" style="width: '<%= l.percent %>'"></div></div>
-
-            <div class="lang-bar"><div class="lang-fill" style="width: '<%= l.percent %>'"></div></div>
-
+            <div class="lang-bar"><div class="lang-fill" style="width: <%= l.percent %>%"></div></div>
           </div>
           <% }); %>
         </div>
